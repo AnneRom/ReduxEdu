@@ -1,8 +1,9 @@
 import { Task } from '../Task/Task';
 import css from './TaskList.module.scss';
+import { useSelector } from 'react-redux';
 
 export const TaskList = () => {
-  const tasks = [];
+  const tasks = useSelector(state => state.tasks.items);
 
   return (
     <ul className={css.list}>
