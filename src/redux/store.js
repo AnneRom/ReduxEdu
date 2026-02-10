@@ -16,47 +16,30 @@ const initialState = {
 };
 
 
-const rootReducer = (state = initialState, action) => {
+
+const filtersReducer = (state = initialState.filters, action) => {
   switch (action.type) {
-    case 'tasks/addTask':
-      return {
-        ...state,
-        tasks: {
-          items: [...state.tasks.items, action.payload]
-        }
-      }
-    case 'tasks/deleteTask':
-      return {
-        ...state,
-        tasks: {
-          items: state.tasks.items.filter(task => task.id !== action.payload)
-        }
-
-
-      }
-    case 'tasks/toggleTask':
-      return {
-        ...state,
-        tasks: {
-          items: state.tasks.items.map(task => {
-            if (task.id === action.payload) {
-              return {
-                ...task,
-              completed: !task.completed,
-            };
-          }
-          return task;
-       
-        })
-      }
-    }
     
-      default:
-      return state;
+    case 'filters/setStatusFilter':
+      return {
+        ...state,
+        status: action.payload,  
+      }
+    
+    default:
+    return state;
   }
   
+
+
+}
+
+const rootReducer = (state = initialState, action) => {
 }
 
 export const store = configureStore({
-    reducer: rootReducer,
+    reducer: {
+        tasks: tasksReducer,
+        filters: filtersReducer,
+    }
 });
