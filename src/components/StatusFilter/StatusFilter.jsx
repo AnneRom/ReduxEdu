@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setStatusFilter } from '../../redux/filtersSlice';
 
 export const StatusFilter = () => {
-    const filter = useSelector(state => state.filters.status);
+    const filter = useSelector(state => state.filters.status);//підписка на стор(отримати дані зі стору)
     const dispatch = useDispatch();
 
     const handleFilterChange = (newFilter) => {

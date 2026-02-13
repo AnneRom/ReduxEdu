@@ -2,7 +2,7 @@ import { Task } from '../Task/Task';
 import css from './TaskList.module.scss';
 import { useSelector } from 'react-redux';
 
-const getVisibleTasks = (tasks, statusFilter) => {
+const getVisibleTasks = (tasks, statusFilter, priorityFilter) => {
   switch (statusFilter) {
     case 'active':
       return tasks.filter((task) => !task.completed);
@@ -18,12 +18,14 @@ export const TaskList = () => {
   const tasks = useSelector(state => state.tasks.items);//[{ id: 0, text: "Learn HTML and CSS", completed: true },...]
 
   const statusFilter = useSelector(state => state.filters.status);//"all"
+  const priorityFilter = useSelector(state => state.filters.priority);//"all"
 
   console.log('Current status filter:', statusFilter);
+  console.log('Current priority filter:', priorityFilter);
   console.log('Tasks from state:', tasks);
 
 
-  const visibleTasks = getVisibleTasks(tasks, statusFilter);//результат роботи функції
+  const visibleTasks = getVisibleTasks(tasks, statusFilter, priorityFilter);//результат роботи функції
 
   return (
     <ul className={css.list}>
