@@ -3,15 +3,22 @@ import css from './TaskList.module.scss';
 import { useSelector } from 'react-redux';
 
 const getVisibleTasks = (tasks, statusFilter, priorityFilter) => {
-  switch (statusFilter) {
-    case 'active':
-      return tasks.filter((task) => !task.completed);
-    case 'completed':
-      return tasks.filter((task) => task.completed);
-    default:
-      return tasks;
-  }
+  return tasks.filter(task => {
+    const statusMatch = 
+      statusFilter === "all" ||
+      (statusFilter === "active" && !task.completed) ||//true
+      (statusFilter === "completed" && task.completed);
 
+    console.log('Status match:', statusMatch);
+      
+    const priorityMatch = 
+      priorityFilter === "all" ||
+      task.priority === priorityFilter;//false
+
+    console.log('Priority match:', priorityMatch);
+
+    return statusMatch && priorityMatch;//умова фільтру // true && true => true
+  });
 };
 
 export const TaskList = () => {

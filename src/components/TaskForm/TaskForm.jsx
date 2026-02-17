@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addTask } from '../../redux/tasksSlice';
 
 export const TaskForm = () => {
+  const [priority, setPriority] = useState("low");
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -25,7 +26,17 @@ export const TaskForm = () => {
         name="text"
         placeholder="Enter task text..."
       />
+
+      <select className={css.prioritySelect} 
+      name="priority" 
+      value={priority}
+      onChange={(event) => setPriority(event.target.value)}> 
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
       <Button type="submit">Add task</Button>
     </form>
   );
 };
+
