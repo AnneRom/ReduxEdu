@@ -2,19 +2,24 @@ import { Button } from '../Button/Button';
 import css from './TaskForm.module.scss';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../../redux/tasksSlice';
+import { useState } from 'react';
 
 export const TaskForm = () => {
-  const [priority, setPriority] = useState("low");
+  const [priority, setPriority] = useState("low");//локальний стан
+  const [text, setText] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    dispatch(addTask({
+    dispatch(addTask({//викликаємо екшен і відправляємо дані на стор(змінюючи глобальний стан)
       id: Date.now(),
-      text: form.elements.text.value,
+      text: text,
       completed: false,
+      priority: priority,
     }))
+    setText("");
+    setPriority("low");
     form.reset();
   };
 
@@ -25,6 +30,8 @@ export const TaskForm = () => {
         type="text"
         name="text"
         placeholder="Enter task text..."
+        value={text}
+        onChange={(event) => setText(event.target.value)}
       />
 
       <select className={css.prioritySelect} 
