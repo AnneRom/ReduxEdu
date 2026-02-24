@@ -49,3 +49,25 @@
 .lowPriority {
   background-color: #c2fbd8;
 }
+
+.priorityIndicator {
+  display: flex;
+  gap: 4px;
+}
+.priorityButton {
+    padding: 8px 16px;
+    margin-right: 8px;
+    border: none;
+    background-color: #cfcfcf;
+    cursor: pointer;
+}
+.priorityButton:hover {
+    background-color: #a5a5a5;
+}
+.priorityButton.active {
+    background-color: #4caf50;
+    color: white;
+}
+.priorityButton.active:hover {
+    background-color: #68b06b;
+}

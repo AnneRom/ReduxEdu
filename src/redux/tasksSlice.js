@@ -10,6 +10,8 @@ const slice = createSlice({
             { id: 3, text: "Discover Redux", completed: false, priority: "low" },
             { id: 4, text: "Build amazing apps", completed: false, priority: "medium" },
         ], 
+        isLoading: false,
+        error: null,
 
     },
     reducers: {
@@ -26,10 +28,31 @@ const slice = createSlice({
                     break;
                 }
             }
-        }
+        },
+        updateTaskPriority: (state, action) => {
+            const { id, priority } = action.payload;
+            for (const task of state.items) {
+                if (task.id === id) {
+                    task.priority = priority;
+                    break;
+                }
+            }
+        },
+        fetchInProgress: (state) => {
+            state.isLoading = true;
+        },
+        fetchSuccess: (state, action) => {
+            state.isLoading = false;
+            state.error = null;
+            state.items = action.payload;
+        },
+        fetchError: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
 
     }
 
 })
-export const { addTask, deleteTask, toggleTask } = slice.actions;
+export const { addTask, deleteTask, toggleTask, updateTaskPriority, fetchInProgress, fetchSuccess, fetchError } = slice.actions;
 export default slice.reducer;
