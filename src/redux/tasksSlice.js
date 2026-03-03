@@ -1,16 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchTasks } from "./operations";
+import { fetchTasks, addTask, deleteTask } from "./operations";
 
 const slice = createSlice({
     name: 'tasks',
     initialState: {
-        items: [
-            // { id: 0, text: "Learn HTML and CSS", completed: true, priority: "high" },
-            // { id: 1, text: "Get good at JavaScript", completed: true, priority: "medium" },
-            // { id: 2, text: "Master React", completed: false, priority: "high" },
-            // { id: 3, text: "Discover Redux", completed: false, priority: "low" },
-            // { id: 4, text: "Build amazing apps", completed: false, priority: "medium" },
-        ], 
+        items: [], 
         isLoading: false,
         error: null,
 
@@ -19,9 +13,9 @@ const slice = createSlice({
         // addTask: (state, action) => {
         //         state.items.push(action.payload)
         // },
-        deleteTask: (state, action) => {
-                state.items = state.items.filter(task => task.id !== action.payload)
-        },
+        // deleteTask: (state, action) => {
+        //         state.items = state.items.filter(task => task.id !== action.payload)
+        // },
         toggleTask: (state, action) => {
             for (const task of state.items) {
                 if (task.id === action.payload) {
@@ -39,18 +33,6 @@ const slice = createSlice({
                 }
             }
         },
-        // fetchInProgress: (state) => {
-        //     state.isLoading = true;
-        // },
-        // fetchSuccess: (state, action) => {
-        //     state.isLoading = false;
-        //     state.error = null;
-        //     state.items = action.payload;
-        // },
-        // fetchError: (state, action) => {
-        //     state.isLoading = false;
-        //     state.error = action.payload;
-        // },
     },
     extraReducers: builder => {
         builder
@@ -65,21 +47,38 @@ const slice = createSlice({
             .addCase(fetchTasks.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+                console.log("Array items fetch:", state.items);
             })
+
             .addCase(addTask.pending, (state) => {
                 state.isLoading = true;
             })
             .addCase(addTask.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.error = null;
+                state.error = null; 
                 state.items.push(action.payload);
             })
             .addCase(addTask.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             })
+
+            .addCase(deleteTask.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteTask.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = null;
+            
+                state.items = state.items.filter(task => task.id !== action.payload.id);
+            })
+            .addCase(deleteTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
     }
 
 })
-export const { addTask, deleteTask, toggleTask, updateTaskPriority, fetchInProgress, fetchSuccess, fetchError } = slice.actions;
+export const { toggleTask, updateTaskPriority } = slice.actions;
+// export const { addTask, deleteTask, toggleTask, updateTaskPriority, fetchInProgress, fetchSuccess, fetchError } = slice.actions;
 export default slice.reducer;

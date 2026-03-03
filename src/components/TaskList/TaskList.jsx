@@ -11,13 +11,13 @@ const getVisibleTasks = (tasks, statusFilter, priorityFilter) => {
       (statusFilter === "active" && !task.completed) ||//true
       (statusFilter === "completed" && task.completed);
 
-    console.log('Status match:', statusMatch);
+    // console.log('Status match:', statusMatch);
       
     const priorityMatch = 
       priorityFilter === "all" ||
       task.priority === priorityFilter;//false
 
-    console.log('Priority match:', priorityMatch);
+    // console.log('Priority match:', priorityMatch);
 
     return statusMatch && priorityMatch;//умова фільтру // true && true => true
   });
@@ -25,6 +25,7 @@ const getVisibleTasks = (tasks, statusFilter, priorityFilter) => {
 
 export const TaskList = () => {
   const tasks = useSelector(state => state.tasks.items);//[{ id: 0, text: "Learn HTML and CSS", completed: true },...]
+  console.log('Tasks from store:', tasks);
 
   const statusFilter = useSelector(state => state.filters.status);//"all"
   const priorityFilter = useSelector(state => state.filters.priority);//"all"
@@ -33,6 +34,7 @@ export const TaskList = () => {
   const error = useSelector(state => state.tasks.error);
 
   const visibleTasks = getVisibleTasks(tasks, statusFilter, priorityFilter);//результат роботи функції
+  console.log('Visible tasks:', visibleTasks);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,6 +49,7 @@ export const TaskList = () => {
       <ul className={css.list}>
         {visibleTasks.map((task) => (
           <li className={css.listItem} key={task.id}>
+            {console.log('Rendering task:', task)}
             <Task task={task} />
           </li>
         ))}

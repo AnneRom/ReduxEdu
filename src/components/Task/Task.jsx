@@ -1,7 +1,8 @@
 import { MdClose } from 'react-icons/md';
 import css from './Task.module.scss';
 import { useDispatch } from 'react-redux';
-import { deleteTask, toggleTask, updateTaskPriority } from '../../redux/tasksSlice';
+import { toggleTask, updateTaskPriority } from '../../redux/tasksSlice';
+import { deleteTask } from '../../redux/operations';
 import clsx from 'clsx';
 
 export const Task = ({ task }) => {
@@ -33,6 +34,7 @@ export const Task = ({ task }) => {
       <button className={css.btn} type="button" onClick={handleDelete}>
         <MdClose size={24} />
       </button>
+      {console.log("task.text:", task.text, typeof task.text)}
     </div>
   );
 };
