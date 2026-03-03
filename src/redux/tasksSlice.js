@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchTasks, addTask, deleteTask } from "./operations";
+import { fetchTasks, addTask, deleteTask, toggleTask, updateTask } from "./operations";
 
 const slice = createSlice({
     name: 'tasks',
@@ -16,14 +16,14 @@ const slice = createSlice({
         // deleteTask: (state, action) => {
         //         state.items = state.items.filter(task => task.id !== action.payload)
         // },
-        toggleTask: (state, action) => {
-            for (const task of state.items) {
-                if (task.id === action.payload) {
-                    task.completed = !task.completed;
-                    break;
-                }
-            }
-        },
+        // toggleTask: (state, action) => {
+        //     for (const task of state.items) {
+        //         if (task.id === action.payload) {
+        //             task.completed = !task.completed;
+        //             break;
+        //         }
+        //     }
+        // },
         updateTaskPriority: (state, action) => {
             const { id, priority } = action.payload;
             for (const task of state.items) {
@@ -76,9 +76,42 @@ const slice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
+
+            .addCase(toggleTask.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(toggleTask.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = null;
+            
+                state.items = state.items.map(task => 
+                    task.id === action.payload.id ? action.payload : task
+                );
+            })
+            .addCase(toggleTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
+            .addCase(updateTask.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateTask.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = null;
+            
+                const index = state.items.findIndex(task => task.id === action.payload.id);
+                if (index !== -1) {
+                    state.items[index] = action.payload;
+                }
+            })
+            .addCase(updateTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
     }
 
 })
-export const { toggleTask, updateTaskPriority } = slice.actions;
+export const { updateTaskPriority } = slice.actions;
 // export const { addTask, deleteTask, toggleTask, updateTaskPriority, fetchInProgress, fetchSuccess, fetchError } = slice.actions;
 export default slice.reducer;

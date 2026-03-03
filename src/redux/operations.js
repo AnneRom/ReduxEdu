@@ -43,6 +43,32 @@ export const deleteTask = createAsyncThunk(
     }
 );
 
+export const toggleTask = createAsyncThunk(
+    'tasks/toggleTask',
+    async (task, thunkAPI) => {
+         try {
+            const response = await axios.put(`/tasks/${task.id}`, {
+                completed: !task.completed
+            });
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const updateTask = createAsyncThunk(
+    'tasks/updateTask',
+    async (id, updates, thunkAPI) => {
+         try {
+            const response = await axios.put(`/tasks/${id}`, updates);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
 // export const fetchTasks = () => async dispatch => {
 //     try {
 //         dispatch(fetchInProgress());

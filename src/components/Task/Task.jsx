@@ -1,8 +1,7 @@
 import { MdClose } from 'react-icons/md';
 import css from './Task.module.scss';
 import { useDispatch } from 'react-redux';
-import { toggleTask, updateTaskPriority } from '../../redux/tasksSlice';
-import { deleteTask } from '../../redux/operations';
+import { deleteTask, updateTask } from '../../redux/operations';
 import clsx from 'clsx';
 
 export const Task = ({ task }) => {
@@ -12,10 +11,16 @@ export const Task = ({ task }) => {
     dispatch(deleteTask(task.id));
   };
   const handleToggle = () => {
-    dispatch(toggleTask(task.id));
+    dispatch(updateTask({
+      id: task.id, 
+      updates: { completed: !task.completed }
+    }))
   };
   const handlePriorityChange = (newPriority) => {
-    dispatch(updateTaskPriority({ id: task.id, priority: newPriority }));
+    dispatch(updateTask({
+      id: task.id, 
+      updates: { priority: newPriority }
+    }))
   }
   return (
     <div className={clsx(css.wrapper, task.priority === "high" && css.highPriority, task.priority === "medium" && css.mediumPriority, task.priority === "low" && css.lowPriority)}>
