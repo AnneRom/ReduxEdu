@@ -58,15 +58,15 @@ export const toggleTask = createAsyncThunk(
 );
 
 export const updateTask = createAsyncThunk(
-    'tasks/updateTask',
-    async (id, updates, thunkAPI) => {
-         try {
-            const response = await axios.put(`/tasks/${id}`, updates);
-            return response.data;
-        } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
-        }
+  'tasks/updateTask',
+  async ({ id, updates }, thunkAPI) => {
+    try {
+      const response = await axios.put(`/tasks/${id}`, updates);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
+  }
 );
 
 // export const fetchTasks = () => async dispatch => {
