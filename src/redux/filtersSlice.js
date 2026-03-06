@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const selectStatusFilter = (state) => state.filters.status;
+export const selectPriorityFilter = (state) => state.filters.priority;
+
 const slice = createSlice({
     name: 'filters',
     initialState: {

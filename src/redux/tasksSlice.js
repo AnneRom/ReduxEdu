@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchTasks, addTask, deleteTask, toggleTask, updateTask } from "./operations";
+import { selectStatusFilter, selectPriorityFilter } from "./filtersSlice";
 
 const handlePending = (state) => {
     state.isLoading = true;
@@ -7,6 +8,43 @@ const handlePending = (state) => {
 const handleRejected = (state, action) => {
     state.isLoading = false;
     state.error = action.payload;
+}
+
+export const selectTasks = (state) => state.tasks.items;
+export const selectIsLoading = (state) => state.tasks.isLoading;
+export const selectError = (state) => state.tasks.error;
+export const selectVisibleTasks = (state) => {
+    const tasks = selectTasks(state);
+    const statusFilter = selectStatusFilter(state);
+    const priorityFilter = selectPriorityFilter(state);
+
+    return tasks.filter(task => {
+    const statusMatch = 
+      statusFilter === "all" ||
+      (statusFilter === "active" && !task.completed) ||
+      (statusFilter === "completed" && task.completed);
+      
+    const priorityMatch = 
+      priorityFilter === "all" ||
+      task.priority === priorityFilter;
+
+    return statusMatch && priorityMatch;
+  });
+}
+export const selectTasksCount = (state) => {
+    console.log("Calculating task count");
+    const tasks = selectTasks(state);
+
+    return tasks.reduce((acc, task) => {
+    if (task.completed) {
+      acc.completed += 1;
+    } else {
+      acc.active += 1;
+    }
+    return acc;
+    
+  }, { active: 0, completed: 0})
+
 }
 
 const slice = createSlice({
