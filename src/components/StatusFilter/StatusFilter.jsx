@@ -1,11 +1,11 @@
 import { Button } from '../Button/Button';
 import css from './StatusFilter.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { setStatusFilter } from '../../redux/filtersSlice';
+import { setStatusFilter, selectStatusFilter } from '../../redux/filtersSlice';
 import clsx from 'clsx';
 
 export const StatusFilter = () => {
-    const filter = useSelector(state => state.filters.status);//підписка на стор(отримати дані зі стору)
+    const filter = useSelector(selectStatusFilter);
     const dispatch = useDispatch();
 
     const handleFilterChange = (newFilter) => {

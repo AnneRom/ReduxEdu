@@ -1,11 +1,11 @@
 import { Button } from '../Button/Button';
 import css from './PriorityFilter.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPriorityFilter } from '../../redux/filtersSlice';
+import { setPriorityFilter, selectPriorityFilter } from '../../redux/filtersSlice';
 import clsx from 'clsx';
 
 export const PriorityFilter = () => {
-    const filter = useSelector(state => state.filters.priority);//підписка на стор(отримати дані зі стору)
+    const filter = useSelector(selectPriorityFilter);
     const dispatch = useDispatch();
 
     const handleFilterChange = (newFilter) => {

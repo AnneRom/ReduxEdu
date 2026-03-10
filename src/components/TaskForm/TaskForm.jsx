@@ -14,7 +14,6 @@ export const TaskForm = () => {
     event.preventDefault();
     const form = event.target;
     dispatch(addTask({//викликаємо екшен і відправляємо дані на стор(змінюючи глобальний стан)
-      id: Date.now(),
       text: text,
       completed: false,
       priority: priority,
