@@ -1,0 +1,39 @@
+.routerList {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+//   @include adaptiveValue("gap", 30, 15, 0, 600, 320);
+  margin: 0;
+  padding: 0;
+}
+
+.link{
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+//   @include adaptiveValue("font-size", 16, 11, 0, 1400, 320);
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 50px;
+  padding: 0 20px;
+//   @include adaptiveValue("height", 50, 30, 0, 1400, 320);
+//   @include adaptiveValue("padding-left", 20, 10, 0, 1400, 320);
+//   @include adaptiveValue("padding-right", 20, 10, 0, 1400, 320);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.link:hover {
+    border-color: #d9e7ff;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
+.link.active{
+  background-color: #4a91e27d;
+  color: white;
+}
+
