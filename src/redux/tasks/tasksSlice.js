@@ -1,6 +1,6 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { fetchTasks, addTask, deleteTask, toggleTask, updateTask } from "./operations";
-import { selectStatusFilter, selectPriorityFilter } from "./filtersSlice";
+import { selectStatusFilter, selectPriorityFilter } from "../filters/filtersSlice";
 
 const handlePending = (state) => {
     state.isLoading = true;

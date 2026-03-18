@@ -1,7 +1,7 @@
 import { MdClose } from 'react-icons/md';
 import css from './Task.module.scss';
 import { useDispatch } from 'react-redux';
-import { deleteTask, updateTask } from '../../redux/operations';
+import { deleteTask, updateTask } from '../../redux/tasks/operations';
 import clsx from 'clsx';
 import { memo } from 'react';
 

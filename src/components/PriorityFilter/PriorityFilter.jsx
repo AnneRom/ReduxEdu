@@ -1,7 +1,7 @@
 import { Button } from '../Button/Button';
 import css from './PriorityFilter.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPriorityFilter, selectPriorityFilter } from '../../redux/filtersSlice';
+import { setPriorityFilter, selectPriorityFilter } from '../../redux/filters/filtersSlice';
 import clsx from 'clsx';
 
 export const PriorityFilter = () => {

@@ -2,8 +2,8 @@ import { Task } from '../Task/Task';
 import css from './TaskList.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchTasks } from '../../redux/operations';
-import { selectIsLoading, selectError, selectVisibleTasks } from '../../redux/tasksSlice';
+import { fetchTasks } from '../../redux/tasks/operations';
+import { selectIsLoading, selectError, selectVisibleTasks } from '../../redux/tasks/tasksSlice';
 
 export const TaskList = () => {
   const isLoading = useSelector(selectIsLoading);
@@ -34,3 +34,5 @@ export const TaskList = () => {
     
   );
 };
+
+export default TaskList;

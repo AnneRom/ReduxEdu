@@ -1,7 +1,7 @@
 import { Button } from '../Button/Button';
 import css from './StatusFilter.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { setStatusFilter, selectStatusFilter } from '../../redux/filtersSlice';
+import { setStatusFilter, selectStatusFilter } from '../../redux/filters/filtersSlice';
 import clsx from 'clsx';
 
 export const StatusFilter = () => {

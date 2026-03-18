@@ -2,7 +2,7 @@ import { Button } from '../Button/Button';
 import css from './TaskForm.module.scss';
 import { useDispatch } from 'react-redux';
 // import { addTask } from '../../redux/tasksSlice';
-import { addTask } from '../../redux/operations';
+import { addTask } from '../../redux/tasks/operations';
 import { useState } from 'react';
 
 export const TaskForm = () => {
@@ -46,4 +46,4 @@ export const TaskForm = () => {
     </form>
   );
 };
-
+export default TaskForm;
