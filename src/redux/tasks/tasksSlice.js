@@ -1,5 +1,5 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
-import { fetchTasks, addTask, deleteTask, toggleTask, updateTask } from "./operations";
+import { fetchTasks, addTask, deleteTask, updateTask } from "./operations";
 import { selectStatusFilter, selectPriorityFilter } from "../filters/filtersSlice";
 
 const handlePending = (state) => {
@@ -83,17 +83,6 @@ const slice = createSlice({
                 state.items = state.items.filter(task => task.id !== action.payload.id);
             })
             .addCase(deleteTask.rejected, handleRejected)
-
-            .addCase(toggleTask.pending, handlePending)
-            .addCase(toggleTask.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.error = null;
-            
-                state.items = state.items.map(task => 
-                    task.id === action.payload.id ? action.payload : task
-                );
-            })
-            .addCase(toggleTask.rejected, handleRejected)
 
             .addCase(updateTask.pending, handlePending)
             .addCase(updateTask.fulfilled, (state, action) => {

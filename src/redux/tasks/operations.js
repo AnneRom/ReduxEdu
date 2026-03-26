@@ -138,26 +138,6 @@ export const deleteTask = createAsyncThunk(
   }
 );
 
-// TOGGLE (completed)
-export const toggleTask = createAsyncThunk(
-  "tasks/toggleTask",
-  async (task, thunkAPI) => {
-    try {
-      const { data, error } = await supabase
-        .from("tasks")
-        .update({ completed: !task.completed })
-        .eq("id", task.id)
-        .select();
-
-      if (error) throw error;
-
-      return data[0];
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
 // UPDATE (priority або інше)
 export const updateTask = createAsyncThunk(
   "tasks/updateTask",
