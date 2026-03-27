@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import TasksPage from './pages/TasksPage/TasksPage';
 import NotFound from './pages/NotFound/NotFound';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from '../redux/auth/operations';
@@ -19,8 +21,12 @@ export const App = () => {
     <Routes> 
         <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="tasks" element={<TasksPage />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+            <Route path="tasks" element={
+              <PrivateRoute redirectTo="/login" component={<TasksPage />} />
+            } />
         </Route>
 
     </Routes>
