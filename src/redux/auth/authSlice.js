@@ -4,7 +4,7 @@ import { register, logIn, logOut, refreshUser } from "./operations";
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: {
+    initialState: {// initial - початкові стани
         user: {
             name: null,
             email: null,
@@ -49,3 +49,12 @@ const authSlice = createSlice({
 })
 // export const { } = slice.actions;
 export default authSlice.reducer;
+
+
+// function sum(a = 1, b) {
+//     return a + b;
+// }
+
+// sum (2, 3); // 5
+// sum (undefined, 3); // 4
+// sum (2); // 3
