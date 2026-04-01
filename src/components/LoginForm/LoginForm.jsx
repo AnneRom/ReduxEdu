@@ -18,12 +18,10 @@ export const LoginForm = () => {
     return (
         <form className={css.form} onSubmit={handleSubmit}>
             <label htmlFor="email">Email:</label>
-            <input type="email" name="email" placeholder="Enter your email" className={css.input} />
+            <input type="email" name="email" placeholder="Enter your email" defaultValue="@gmail.com" className={css.input} />
             <label htmlFor="password">Password:</label>
             <input type="password" name="password" placeholder="Enter your password" className={css.input} />
             <button type="submit" className={css.button}>Log In</button>
-            <button type="button">Button</button>
-            <button type="reset">Reset</button>
         </form>
     );
 };
