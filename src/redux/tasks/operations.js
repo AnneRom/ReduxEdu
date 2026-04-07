@@ -87,9 +87,11 @@ export const fetchTasks = createAsyncThunk(
   "tasks/fetchAll",
   async (_, thunkAPI) => {
     try {
+      const { data: {user},} = await supabase.auth.getUser();
       const { data, error } = await supabase
         .from("tasks")
-        .select("*");
+        .select("*")
+        .eq("user_id", user.id);
 
       if (error) throw error;
 
@@ -105,10 +107,19 @@ export const addTask = createAsyncThunk(
   "tasks/addTask",
   async (task, thunkAPI) => {
     try {
+      const { data: {user},} = await supabase.auth.getUser();
       const { data, error } = await supabase
         .from("tasks")
-        .insert([task])
+        .insert([
+          {
+            ... task,
+            user_id: user.id
+          }
+          ])
         .select();
+
+        console.log("DATA:", data);
+        console.log("ERROR:", error);
 
       if (error) throw error;
 

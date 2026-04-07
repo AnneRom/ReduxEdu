@@ -55,7 +55,9 @@ const slice = createSlice({
 
     },
     reducers: {
-    
+        resetTasks: (state) => {
+            state.items = [];
+        },
     },
     extraReducers: builder => {
         builder
@@ -98,5 +100,5 @@ const slice = createSlice({
     }
 
 })
-// export const { } = slice.actions;
+export const { resetTasks } = slice.actions;
 export default slice.reducer;

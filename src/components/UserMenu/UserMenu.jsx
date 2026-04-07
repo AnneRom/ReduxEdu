@@ -3,6 +3,7 @@ import { selectUserName } from "../../redux/auth/selectors";
 import clsx from "clsx";
 import css from './UserMenu.module.scss';
 import { logOut } from "../../redux/auth/operations";
+import { resetTasks } from "../../redux/tasks/tasksSlice";
 
 
 const buildLinkClass = ({ isActive }) => {
@@ -15,6 +16,7 @@ export const UserMenu = () => {
 
     const handleLogOut = () => {
         dispatch(logOut());
+        dispatch(resetTasks());
     }
     return (
         <div>
